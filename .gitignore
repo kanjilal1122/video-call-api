@@ -1,0 +1,6 @@
+#dotenv file added dotgitignore 
+.env
+.env.test
+
+#node modules
+node_modules
