@@ -1,6 +1,8 @@
-require("dotenv").config();
+//require("dotenv").config() ;
+//process.env.PORT
 const express = require("express");
 const app = express();
+const PORT = 8080;
 
 //middleware
 app.use(express.json());
@@ -24,6 +26,4 @@ app.post("/test", (req, res) => {
   res.json({ name, dateTime, userId });
 });
 
-app.listen(process.env.PORT, () =>
-  console.log(`Express running on the ${process.env.PORT} number`)
-);
+app.listen(PORT, () => console.log(`Express running on the ${PORT} number`));
