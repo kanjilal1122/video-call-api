@@ -20,7 +20,7 @@ app.post("/", (req, res) => {
 
 app.get("/test", (req, res) => {
   const dateTime = new Date();
-  const userId = uuidv1();
+  const userId = uuidv1.v1();
   console.log("UserId", userId);
   res.send(
     `This is a get method for  test route  ,  datetime is  ${dateTime} and UserId is ${userId} `
