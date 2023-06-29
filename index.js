@@ -3,6 +3,8 @@
 const express = require("express");
 const app = express();
 const PORT = 8080;
+import { v1 as uuidv1 } from "uuid";
+//const bodyParser = require(body - parser);
 
 //middleware
 app.use(express.json());
@@ -17,13 +19,22 @@ app.post("/", (req, res) => {
 });
 
 app.get("/test", (req, res) => {
-  res.send(`This is a test route `);
+  const dateTime = new Date();
+  const userId = uuidv1();
+  console.log("UserId", userId);
+  res.send(
+    `This is a get method for  test route  ,  datetime is  ${dateTime} and UserId is ${userId} `
+  );
 });
 
 app.post("/test", (req, res) => {
   const { dateTime, name, userId } = req.body;
+  const time = new Date().toUTCString();
+  console.log(time);
 
-  res.json({ name, dateTime, userId });
+  res.send(
+    `Name is :${name} , UserId : ${userId}  ,  dateTime ${dateTime} and time ${time} `
+  );
 });
 
 app.listen(PORT, () => console.log(`Express running on the ${PORT} number`));
