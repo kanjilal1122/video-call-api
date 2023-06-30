@@ -7,6 +7,7 @@ const uuidv1 = require("uuid");
 
 //middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //app.use(express.static(process.env.PUBLIC_FOLDER));
 
@@ -44,6 +45,17 @@ app.get("/api/users", (req, res) => {
     "Token ": token,
     "MeetingLink:": meetinglink,
   });
+});
+
+//target specificy a params using params functiion and this is the middleware 
+app.param("name", (req, res, next, name) => {
+  const changeName = name.toUpperCase();
+  req.name = changeName;
+  next();
+});
+
+app.get("/api/users/:name", (req, res) => {
+  res.send("Hello " + req.name + "!!!");
 });
 
 app.get("/api/:version", (req, res) => {
