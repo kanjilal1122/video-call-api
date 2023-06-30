@@ -39,11 +39,16 @@ app.post("/test", (req, res) => {
 
 app.get("/api/users", (req, res) => {
   const { user_id, token, meetinglink } = req.query;
-  console.log(req.query);
   res.send({
     "user Id ": user_id,
     "Token ": token,
     "MeetingLink:": meetinglink,
+  });
+});
+
+app.get("/api/:version", (req, res) => {
+  res.send({
+    version: req.params.version,
   });
 });
 
