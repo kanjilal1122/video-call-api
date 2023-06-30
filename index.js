@@ -1,13 +1,13 @@
-//require("dotenv").config() ;
-//process.env.PORT
+require("dotenv").config();
 const express = require("express");
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const uuidv1 = require("uuid");
 //const bodyParser = require(body - parser);
 
 //middleware
 app.use(express.json());
+
 //app.use(express.static(process.env.PUBLIC_FOLDER));
 
 app.get("/", (req, res) => {
@@ -35,6 +35,16 @@ app.post("/test", (req, res) => {
   res.send(
     `Name is :${name} , UserId : ${userId}  ,  dateTime ${dateTime} and time ${time} `
   );
+});
+
+app.get("/api/users", (req, res) => {
+  const { user_id, token, meetinglink } = req.query;
+  console.log(req.query);
+  res.send({
+    "user Id ": user_id,
+    "Token ": token,
+    "MeetingLink:": meetinglink,
+  });
 });
 
 app.listen(PORT, () => console.log(`Express running on the ${PORT} number`));
