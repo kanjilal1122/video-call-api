@@ -8,6 +8,10 @@ const uuidv1 = require("uuid");
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+  next();
+});
 
 //app.use(express.static(process.env.PUBLIC_FOLDER));
 
@@ -47,7 +51,7 @@ app.get("/api/users", (req, res) => {
   });
 });
 
-//target specificy a params using params functiion and this is the middleware 
+//target specificy a params using params functiion and this is the middleware
 app.param("name", (req, res, next, name) => {
   const changeName = name.toUpperCase();
   req.name = changeName;
