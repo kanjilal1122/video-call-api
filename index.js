@@ -23,14 +23,14 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  res.send("This is a post route in homepage");
+  res.json("This is a post route in homepage");
 });
 
 app.get("/test", (req, res) => {
   const dateTime = new Date();
   const userId = uuidv1.v1();
   console.log("UserId", userId);
-  res.send(
+  res.json(
     `This is a get method for  test route  ,  datetime is  ${dateTime} and UserId is ${userId} `
   );
 });
@@ -40,14 +40,14 @@ app.post("/test", (req, res) => {
   const time = new Date().toUTCString();
   console.log(time);
 
-  res.send(
+  res.json(
     `Name is :${name} , UserId : ${userId}  ,  dateTime ${dateTime} and time ${time} `
   );
 });
 
 app.get("/api/users", (req, res) => {
   const { user_id, token, meetinglink } = req.query;
-  res.send({
+  res.json({
     "user Id ": user_id,
     "Token ": token,
     "MeetingLink:": meetinglink,
@@ -62,11 +62,11 @@ app.param("name", (req, res, next, name) => {
 });
 
 app.get("/api/users/:name", (req, res) => {
-  res.send("Hello " + req.name + "!!!");
+  res.json("Hello " + req.name + "!!!");
 });
 
 app.get("/api/:version", (req, res) => {
-  res.send({
+  res.json({
     version: req.params.version,
   });
 });
