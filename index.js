@@ -23,13 +23,25 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  res.json("This is a post route in homepage");
+  const { uuid, meeting_name } = req.body;
+  //console.log(req.body.uuid, req.body.meeting_name);
+  const call_back_url = "http://localhost:5173/thankyou";
+  const time_stamp = Date.now();
+  const id = uuidv1.v1();
+
+  res.json({
+    uuid: uuid,
+    meetingName: meeting_name,
+    id: id,
+    time_stamp: time_stamp,
+    call_back_url: call_back_url,
+  });
 });
 
 app.get("/test", (req, res) => {
   const dateTime = new Date();
   const userId = uuidv1.v1();
-  console.log("UserId", userId);
+  //console.log("UserId", userId);
   res.json(
     `This is a get method for  test route  ,  datetime is  ${dateTime} and UserId is ${userId} `
   );
