@@ -23,18 +23,18 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  const { uuid_id, meeting_name } = req.body;
+  const { name, id } = req.body;
   console.log({
     uuid_id:uuid_id, meeting_name:meeting_name
   });
   const call_back_url = "http://localhost:5173/thankyou";
   const time_stamp = Date.now();
-  const id = uuidv1.v1();
+  const uuid_id = uuidv1.v1();
 
   res.json({
-    uuid: uuid_id,
-    meeting_name: meeting_name,
-    id: id,
+    uuid: id,
+    meeting_name:name,
+    id: uuid_id,
     create_at: time_stamp,
     call_back_url: call_back_url,
   });
