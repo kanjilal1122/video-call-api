@@ -10,7 +10,9 @@ let meetingId = 1;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
-  meetingId++;
+  if (req.method === "POST") {
+    meetingId++;
+  }
   next();
 });
 
