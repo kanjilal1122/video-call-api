@@ -24,9 +24,9 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   const { name, id } = req.body;
-  console.log({
-    uuid_id:uuid_id, meeting_name:meeting_name
-  });
+  // console.log({
+  //   uuid_id:uuid_id, meeting_name:meeting_name
+  // });
   const call_back_url = "http://localhost:5173/thankyou";
   const time_stamp = Date.now();
   const uuid_id = uuidv1.v1();
