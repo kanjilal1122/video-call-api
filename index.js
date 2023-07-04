@@ -4,10 +4,16 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 const uuidv1 = require("uuid");
 //const bodyParser = require(body - parser);
+let meetingId = 1;
 
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  meetingId++;
+  next();
+});
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
@@ -24,19 +30,18 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   const { name, id } = req.body;
-  // console.log({
-  //   uuid_id:uuid_id, meeting_name:meeting_name
-  // });
+
   const call_back_url = "http://localhost:5173/thankyou";
   const time_stamp = Date.now();
   const uuid_id = uuidv1.v1();
 
   res.json({
     uuid: id,
-    meeting_name:name,
+    meeting_name: name,
     id: uuid_id,
     create_at: time_stamp,
     call_back_url: call_back_url,
+    meetingId: meetingId,
   });
 });
 
