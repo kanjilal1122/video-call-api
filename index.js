@@ -50,46 +50,49 @@ app.post("/", (req, res) => {
 app.get("/test", (req, res) => {
   const dateTime = new Date();
   const userId = uuidv1.v1();
-  //console.log("UserId", userId);
-  res.json(
-    `This is a get method for  test route  ,  datetime is  ${dateTime} and UserId is ${userId} `
-  );
+  //console.log("UserId", userId); `This is a get method for  test route  ,  datetime is  ${dateTime} and UserId is ${userId} `
+  res.json({
+    date: dateTime,
+    user: userId,
+  });
 });
 
 app.post("/test", (req, res) => {
   const { dateTime, name, userId } = req.body;
   const time = new Date().toUTCString();
-  console.log(time);
+  //console.log(time); `Name is :${name} , UserId : ${userId}  ,  dateTime ${dateTime} and time ${time} `
 
-  res.json(
-    `Name is :${name} , UserId : ${userId}  ,  dateTime ${dateTime} and time ${time} `
-  );
-});
-
-app.get("/api/users", (req, res) => {
-  const { user_id, token, meetinglink } = req.query;
   res.json({
-    "user Id ": user_id,
-    "Token ": token,
-    "MeetingLink:": meetinglink,
+    Name: name,
+    DateTime: dateTime,
+    userId: userId,
   });
 });
+
+// app.get("/api/users", (req, res) => {
+//   const { user_id, token, meetinglink } = req.query;
+//   res.json({
+//     "user Id ": user_id,
+//     "Token ": token,
+//     "MeetingLink:": meetinglink,
+//   });
+// });
 
 //target specificy a params using params functiion and this is the middleware
-app.param("name", (req, res, next, name) => {
-  const changeName = name.toUpperCase();
-  req.name = changeName;
-  next();
-});
+// app.param("name", (req, res, next, name) => {
+//   const changeName = name.toUpperCase();
+//   req.name = changeName;
+//   next();
+// });
 
-app.get("/api/users/:name", (req, res) => {
-  res.json("Hello " + req.name + "!!!");
-});
+// app.get("/api/users/:name", (req, res) => {
+//   res.json("Hello " + req.name + "!!!");
+// });
 
-app.get("/api/:version", (req, res) => {
-  res.json({
-    version: req.params.version,
-  });
-});
+// app.get("/api/:version", (req, res) => {
+//   res.json({
+//     version: req.params.version,
+//   });
+// });
 
 app.listen(PORT, () => console.log(`Express running on the ${PORT} number`));
