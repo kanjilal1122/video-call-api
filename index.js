@@ -78,16 +78,19 @@ app.get("/api/users", (req, res) => {
   });
 });
 
+//target specificy a params using params functiion and this is the middleware
+app.param("name", (req, res, next, name) => {
+  const changeName = name.toUpperCase();
+  req.name = changeName;
+  next();
+});
+
 
 app.get("/api/users/:name", (req, res) => {
+  console.log(req.nam)
   res.json("Hello " + req.name + "!!!");
 });
-//target specificy a params using params functiion and this is the middleware
-// app.param("name", (req, res, next, name) => {
-//   const changeName = name.toUpperCase();
-//   req.name = changeName;
-//   next();
-// });
+
 
 
 // app.get("/api/:version", (req, res) => {
