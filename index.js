@@ -69,15 +69,19 @@ app.post("/test", (req, res) => {
   });
 });
 
-// app.get("/api/users", (req, res) => {
-//   const { user_id, token, meetinglink } = req.query;
-//   res.json({
-//     "user Id ": user_id,
-//     "Token ": token,
-//     "MeetingLink:": meetinglink,
-//   });
-// });
+app.get("/api/users", (req, res) => {
+  const { user_id, token, meetinglink } = req.query;
+  res.json({
+    "user Id ": user_id,
+    "Token ": token,
+    "MeetingLink:": meetinglink,
+  });
+});
 
+
+app.get("/api/users/:name", (req, res) => {
+  res.json("Hello " + req.name + "!!!");
+});
 //target specificy a params using params functiion and this is the middleware
 // app.param("name", (req, res, next, name) => {
 //   const changeName = name.toUpperCase();
@@ -85,9 +89,6 @@ app.post("/test", (req, res) => {
 //   next();
 // });
 
-// app.get("/api/users/:name", (req, res) => {
-//   res.json("Hello " + req.name + "!!!");
-// });
 
 // app.get("/api/:version", (req, res) => {
 //   res.json({
