@@ -31,14 +31,16 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  const { name, id } = req.body;
+  // const { name, id } = req.body;
+  const { name } = req.body;
 
   const call_back_url = "http://localhost:5173/thankyou";
   const time_stamp = Date.now();
   const uuid_id = uuidv1.v1();
+  const meetingLink = `localhost:5173/meeting/${name}/${uuid_id}`
 
   res.json({
-    uuid: id,
+    meetingLink,
     meeting_name: name,
     id: uuid_id,
     create_at: time_stamp,
