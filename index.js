@@ -32,19 +32,22 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   // const { name, id } = req.body;
-  const { name } = req.body;
+  const { meetingName, call_back_url, recording_status } = req.body;
 
-  const call_back_url = "http://localhost:5173/thankyou";
-  const time_stamp = Date.now();
+  //const call_back_url = "http://localhost:5173/thankyou";
+  //const time_stamp = Date.now();
   const uuid_id = uuidv1.v1();
-  const meetingLink = `localhost:5173/meeting/${name}/${uuid_id}`
+  const meetingLink = `localhost:5173/meeting/${meetingName}/${uuid_id}`;
+  const call_back_url_res = call_back_url;
+  const recording_status_res = recording_status;
+  console.log(call_back_url_res, recording_status_res);
 
   res.json({
     meetingLink,
-    meeting_name: name,
+    // meeting_name: name,
     id: uuid_id,
-    create_at: time_stamp,
-    call_back_url: call_back_url,
+    //create_at: time_stamp,
+    //call_back_url: call_back_url,
     meetingId: meetingId,
   });
 });
@@ -87,13 +90,10 @@ app.param("name", (req, res, next, name) => {
   next();
 });
 
-
 app.get("/api/users/:name", (req, res) => {
-  console.log(req.nam)
+  console.log(req.nam);
   res.json("Hello " + req.name + "!!!");
 });
-
-
 
 // app.get("/api/:version", (req, res) => {
 //   res.json({
