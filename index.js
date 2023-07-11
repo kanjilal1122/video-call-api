@@ -37,15 +37,17 @@ app.post("/", (req, res) => {
   //const call_back_url = "http://localhost:5173/thankyou";
   //const time_stamp = Date.now();
   const uuid_id = uuidv1.v1();
-  const meetingLink = `localhost:5173/meeting/${meetingName}/${uuid_id}`;
+  const meetingLink = `https://vision.proteger.one/meeting/${uuid_id}`;
+  const dev_meetingLink = `localhost:5173/meeting/${uuid_id}`;
   const call_back_url_res = call_back_url;
   const recording_status_res = recording_status;
   console.log(call_back_url_res, recording_status_res);
 
   res.json({
     meetingLink,
-    // meeting_name: name,
-    id: uuid_id,
+    dev_meetingLink,
+    meeting_name: meetingName,
+    Meeting_UUID: uuid_id,
     //create_at: time_stamp,
     //call_back_url: call_back_url,
     meetingId: meetingId,
