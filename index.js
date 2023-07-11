@@ -54,6 +54,66 @@ app.post("/", (req, res) => {
   });
 });
 
+app.get("/meeting_details", (req, res) => {
+  const meeting_id = 12345;
+  const meeting_uuid_id = uuidv1.v1();
+  const meetingLink = `https://vision.proteger.one/meeting/${meeting_uuid_id}`;
+  const meeting_name = "geogo";
+  //const dev_meetingLink = `localhost:5173/meeting/${uuid_id}`;
+  res.json({
+    meetingLink,
+    meeting_name,
+    meeting_uuid_id,
+    meeting_id,
+  });
+});
+
+//post / create_meeting 
+app.get("/create_meeting", (req, res) => {
+  const meeting_id = 12345;
+  const meeting_uuid_id = uuidv1.v1();
+  //const meetingLink = `https://vision.proteger.one/meeting/${meeting_uuid_id}`;
+  const meeting_name = "geogo";
+  
+  res.json({
+    
+    meeting_name,
+    meeting_uuid_id,
+    meeting_id,
+  });
+});
+
+
+
+app.post("/create_meeting", (req, res) => {
+  // const { name, id } = req.body;
+  const { meetingName, call_back_url, recording_status } = req.body;
+
+  //const call_back_url = "http://localhost:5173/thankyou";
+  //const time_stamp = Date.now();
+  //const uuid_id = uuidv1.v1();
+  //const meetingLink = `https://vision.proteger.one/meeting/${uuid_id}`;
+  //const dev_meetingLink = `localhost:5173/meeting/${uuid_id}`;
+  const call_back_url_res = call_back_url;
+  const recording_status_res = recording_status;
+  console.log(call_back_url_res, recording_status_res);
+
+  res.json({
+    // meetingLink,
+    // dev_meetingLink,
+    // meeting_name: meetingName,
+    // Meeting_UUID: uuid_id,
+    //create_at: time_stamp,
+    // call_back_url: call_back_url_res,
+    // meetingId: meetingId,
+    call_back_url_res ,
+    recording_status_res ,
+    meetingName
+
+  });
+});
+
+
 app.get("/test", (req, res) => {
   const dateTime = new Date();
   const userId = uuidv1.v1();
