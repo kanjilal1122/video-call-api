@@ -32,24 +32,24 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   // const { name, id } = req.body;
-  const { meetingName, call_back_url, recording_status } = req.body;
+  const { meeting_name, callback_url, recording_status } = req.body;
 
-  //const call_back_url = "http://localhost:5173/thankyou";
+  //const callback_url = "http://localhost:5173/thankyou";
   //const time_stamp = Date.now();
   const uuid_id = uuidv1.v1();
   const meetingLink = `https://vision.proteger.one/meeting/${uuid_id}`;
   const dev_meetingLink = `localhost:5173/meeting/${uuid_id}`;
-  const call_back_url_res = call_back_url;
+  const call_back_url_res = callback_url;
   const recording_status_res = recording_status;
   console.log(call_back_url_res, recording_status_res);
 
   res.json({
     meetingLink,
     dev_meetingLink,
-    meeting_name: meetingName,
+    meeting_name: meeting_name,
     Meeting_UUID: uuid_id,
     //create_at: time_stamp,
-    //call_back_url: call_back_url,
+    //callback_url: callback_url,
     meetingId: meetingId,
   });
 });
@@ -87,28 +87,28 @@ app.get("/create_meeting", (req, res) => {
 
 app.post("/create_meeting", (req, res) => {
   // const { name, id } = req.body;
-  const { meetingName, call_back_url, recording_status } = req.body;
+  const { meeting_name, callback_url, recording_status } = req.body;
 
-  //const call_back_url = "http://localhost:5173/thankyou";
+  //const callback_url = "http://localhost:5173/thankyou";
   //const time_stamp = Date.now();
   //const uuid_id = uuidv1.v1();
   //const meetingLink = `https://vision.proteger.one/meeting/${uuid_id}`;
   //const dev_meetingLink = `localhost:5173/meeting/${uuid_id}`;
-  const call_back_url_res = call_back_url;
+  const call_back_url_res = callback_url;
   const recording_status_res = recording_status;
   console.log(call_back_url_res, recording_status_res);
 
   res.json({
     // meetingLink,
     // dev_meetingLink,
-    // meeting_name: meetingName,
+    // meeting_name: meeting_name,
     // Meeting_UUID: uuid_id,
     //create_at: time_stamp,
-    // call_back_url: call_back_url_res,
+    // callback_url: call_back_url_res,
     // meetingId: meetingId,
     call_back_url_res ,
     recording_status_res ,
-    meetingName
+    meeting_name
 
   });
 });
