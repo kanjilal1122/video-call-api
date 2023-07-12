@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 8080;
 const uuidv1 = require("uuid");
+const db = require("./query");
 //const bodyParser = require(body - parser);
 let meeting_id = 1;
 
@@ -36,9 +37,9 @@ app.post("/", (req, res) => {
 
   //const callback_url = "http://localhost:5173/thankyou";
   //const time_stamp = Date.now();
-  const Meeting_uuid = uuidv1.v1();
-  const meeting_link = `https://vision.proteger.one/meeting/${Meeting_uuid}`;
-  const dev_meeting_link = `localhost:5173/meeting/${Meeting_uuid}`;
+  const meeting_uuid = uuidv1.v1();
+  const meeting_link = `https://vision.proteger.one/meeting/${meeting_uuid}`;
+  const dev_meeting_link = `localhost:5173/meeting/${meeting_uuid}`;
   //const callback_url = callback_url;
   //const recording_status_res = recording_status;
   console.log(callback_url, recording_status);
@@ -47,70 +48,75 @@ app.post("/", (req, res) => {
     meeting_link,
     dev_meeting_link,
     meeting_name,
-    Meeting_uuid,
+    meeting_uuid,
     //create_at: time_stamp,
     //callback_url: callback_url,
-    meeting_id
-    
-  });
-});
-
-app.get("/meeting_details", (req, res) => {
-  const meeting_id = 12345;
-  const meeting_uuid = uuidv1.v1();
-  const meeting_link = `https://vision.proteger.one/meeting/${meeting_uuid}`;
-  const meeting_name = "geogo";
-  //const dev_meetingLink = `localhost:5173/meeting/${uuid_id}`;
-  res.json({
-    meeting_link,
-    meeting_name,
-    meeting_uuid,
     meeting_id,
   });
 });
+
+// app.get("/meeting_details", (req, res) => {
+//   const meeting_id = 12345;
+//   const meeting_uuid = uuidv1.v1();
+//   const meeting_link = `https://vision.proteger.one/meeting/${meeting_uuid}`;
+//   const meeting_name = "geogo";
+//   //const dev_meetingLink = `localhost:5173/meeting/${uuid_id}`;
+//   res.json({
+//     meeting_link,
+//     meeting_name,
+//     meeting_uuid,
+//     meeting_id,
+//   });
+// });
+
+app.get('/meetings', db.get_meeting_details);
+app.get('/meetings/:id', db.get_meeting_details_by_id);
+app.post('/createmeeting', db.create_meeting);
+
+
 
 //post / create_meeting
-app.get("/create_meeting", (req, res) => {
-  const meeting_id = 12345;
-  const meeting_uuid = uuidv1.v1();
-  const meeting_link = `https://www.google.come`;
-  const meeting_name = "geogo";
+// app.get("/create_meeting", (req, res) => {
+//   const meeting_id = 12345;
+//   const meeting_uuid = uuidv1.v1();
+//   const meeting_link = `https://www.google.come`;
+//   const meeting_name = "geogo";
 
-  res.json({
-    meeting_name,
-    meeting_uuid,
-    meeting_id,
-    meeting_link,
-  });
-});
+//   res.json({
+//     meeting_name,
+//     meeting_uuid,
+//     meeting_id,
+//     meeting_link,
+//   });
+// });
 
-app.post("/create_meeting", (req, res) => {
-  // const { name, id } = req.body;
-  const { meeting_name, callback_url, recording_status } = req.body;
-  //const callback_url = callback_url;
-  //const recording_status_res = recording_status;
-  console.log(callback_url, recording_status);
+// app.post("/create_meeting/", (req, res) => {
+//   // const { name, id } = req.body;
+//   const { meeting_name, callback_url, recording_status } = req.body;
+//   //const callback_url = callback_url;
+//   //const recording_status_res = recording_status;
+//   console.log(callback_url, recording_status);
 
-  //const callback_url = "http://localhost:5173/thankyou";
-  //const time_stamp = Date.now();
-  const meeting_uuid = uuidv1.v1();
-  const meeting_link = `https://vision.proteger.one/meeting/${meeting_uuid}`;
-  //const dev_meetingLink = `localhost:5173/meeting/${uuid_id}`;
+//   //const callback_url = "http://localhost:5173/thankyou";
+//   //const time_stamp = Date.now();
+//   const meeting_uuid = uuidv1.v1();
+//   const meeting_link = `https://vision.proteger.one/meeting/${meeting_uuid}`;
+//   //const dev_meetingLink = `localhost:5173/meeting/${uuid_id}`;
 
-  res.json({
-    callback_url,
-    recording_status,
-    meeting_name,
-    meeting_link,
-    meeting_uuid,
+//   res.json({
+//     callback_url,
+//     recording_status,
+//     meeting_name,
+//     meeting_link,
+//     meeting_uuid,
 
-    // dev_meetingLink,
-    // meeting_name: meeting_name,
-    //create_at: time_stamp,
-    // callback_url: callback_url_res,
-    // meetingId: meetingId,
-  });
-});
+//     // dev_meetingLink,
+//     // meeting_name: meeting_name,
+//     //create_at: time_stamp,
+//     // callback_url: callback_url_res,
+//     // meetingId: meetingId,
+//   });
+// });
 
 // app.get("/test", (req, res) => {
 //   const dateTime = new Date();
