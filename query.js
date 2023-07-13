@@ -6,8 +6,9 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
+
 const get_meeting_details = (req, res) => {
-  pool.query("SELECT * FROM meetings ORDER BY id ASC", (error, results) => {
+  pool.query("SELECT * FROM meetingTest ORDER BY id ASC", (error, results) => {
     if (error) {
       throw error;
     }
@@ -16,10 +17,10 @@ const get_meeting_details = (req, res) => {
 };
 
 const get_meeting_details_by_id = (req, res) => {
-  const id = req.params.id; 
+  const id = req.params.id;
 
   pool.query(
-    'SELECT *  FROM meetings WHERE uuid = $1',
+    "SELECT *  FROM meetingTest WHERE uuid = $1",
     [id],
     (error, results) => {
       if (error) {
@@ -36,7 +37,7 @@ const create_meeting = (req, res) => {
   const created_at = Date.now();
   //console.log(meeting_name, callback_url, recording_status, uuid);
   pool.query(
-    'INSERT INTO meetings(uuid , meeting_name , created_at ,callback_url  , recording_status) VALUES($1 , $2 , $3  , $4 ,$5) RETURNING *',
+    "INSERT INTO meetingTest(uuid , meeting_name , created_at ,callback_url  , recording_status) VALUES($1 , $2 , $3  , $4 ,$5) RETURNING *",
     [uuid, meeting_name, created_at, callback_url, recording_status],
     (error, results) => {
       if (error) {

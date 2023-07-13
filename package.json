@@ -1,7 +1,11 @@
 {
+  "scripts": {
+    "migrate": "node-pg-migrate"
+  },
   "dependencies": {
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "node-pg-migrate": "^6.2.2",
     "pg": "^8.11.1",
     "uuid": "^9.0.0"
   }

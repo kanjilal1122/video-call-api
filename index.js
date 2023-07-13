@@ -31,29 +31,30 @@ app.get("/", (req, res) => {
   res.json("Wellcomw to the Express World");
 });
 
-app.post("/", (req, res) => {
-  // const { name, id } = req.body;
-  const { meeting_name, callback_url, recording_status } = req.body;
+app.post("/", db.create_meeting);
+//(req, res) => {
+//   // const { name, id } = req.body;
+//   const { meeting_name, callback_url, recording_status } = req.body;
 
-  //const callback_url = "http://localhost:5173/thankyou";
-  //const time_stamp = Date.now();
-  const meeting_uuid = uuidv1.v1();
-  const meeting_link = `https://vision.proteger.one/meeting/${meeting_uuid}`;
-  const dev_meeting_link = `localhost:5173/meeting/${meeting_uuid}`;
-  //const callback_url = callback_url;
-  //const recording_status_res = recording_status;
-  console.log(callback_url, recording_status);
+//   //const callback_url = "http://localhost:5173/thankyou";
+//   //const time_stamp = Date.now();
+//   const meeting_uuid = uuidv1.v1();
+//   const meeting_link = `https://vision.proteger.one/meeting/${meeting_uuid}`;
+//   const dev_meeting_link = `localhost:5173/meeting/${meeting_uuid}`;
+//   //const callback_url = callback_url;
+//   //const recording_status_res = recording_status;
+//   console.log(callback_url, recording_status);
 
-  res.json({
-    meeting_link,
-    dev_meeting_link,
-    meeting_name,
-    meeting_uuid,
-    //create_at: time_stamp,
-    //callback_url: callback_url,
-    meeting_id,
-  });
-});
+//   res.json({
+//     meeting_link,
+//     dev_meeting_link,
+//     meeting_name,
+//     meeting_uuid,
+//     //create_at: time_stamp,
+//     //callback_url: callback_url,
+//     meeting_id,
+//   });
+//});
 
 // app.get("/meeting_details", (req, res) => {
 //   const meeting_id = 12345;
@@ -69,11 +70,9 @@ app.post("/", (req, res) => {
 //   });
 // });
 
-app.get('/meetings', db.get_meeting_details);
-app.get('/meetings/:id', db.get_meeting_details_by_id);
-app.post('/createmeeting', db.create_meeting);
-
-
+app.get("/meetings", db.get_meeting_details);
+app.get("/meetings/:id", db.get_meeting_details_by_id);
+app.post("/createmeeting", db.create_meeting);
 
 //post / create_meeting
 // app.get("/create_meeting", (req, res) => {
