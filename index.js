@@ -139,14 +139,14 @@ app.post("/test", (req, res) => {
   });
 });
 
-// app.get("/api/users", (req, res) => {
-//   const { user_id, token, meetinglink } = req.query;
-//   res.json({
-//     "user Id ": user_id,
-//     "Token ": token,
-//     "MeetingLink:": meetinglink,
-//   });
-// });
+app.get("/api/users", (req, res) => {
+  const { user_id, token, meetinglink } = req.query;
+  res.json({
+    "user Id ": user_id,
+    "Token ": token,
+    "MeetingLink:": meetinglink,
+  });
+});
 
 // //target specificy a params using params functiion and this is the middleware
 // app.param("name", (req, res, next, name) => {
