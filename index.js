@@ -70,9 +70,9 @@ app.post("/", db.create_meeting);
 //   });
 // });
 
-app.get("/meetings", db.get_meeting_details);
-app.get("/meeting/:id", db.get_meeting_details_by_id);
-app.post("/createmeeting", db.create_meeting);
+// app.get("/meetings", db.get_meeting_details);
+// app.get("/meeting/:id", db.get_meeting_details_by_id);
+// app.post("/createmeeting", db.create_meeting);
 
 post / create_meeting
 app.get("/create_meeting", (req, res) => {
