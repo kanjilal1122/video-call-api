@@ -25,13 +25,15 @@ app.use((req, res, next) => {
   next();
 });
 
-//app.use(express.static(process.env.PUBLIC_FOLDER));
+
 
 app.get("/", (req, res) => {
   res.json("Wellcomw to the Express World");
 });
 
 app.post("/", db.create_meeting);
+
+
 //(req, res) => {
 //   // const { name, id } = req.body;
 //   const { meeting_name, callback_url, recording_status } = req.body;
@@ -74,7 +76,7 @@ app.post("/", db.create_meeting);
 // app.get("/meeting/:id", db.get_meeting_details_by_id);
 // app.post("/createmeeting", db.create_meeting);
 
-post / create_meeting
+
 app.get("/create_meeting", (req, res) => {
   const meeting_id = 12345;
   const meeting_uuid = uuidv1.v1();
@@ -149,21 +151,25 @@ app.get("/api/users", (req, res) => {
 });
 
 // //target specificy a params using params functiion and this is the middleware
-// app.param("name", (req, res, next, name) => {
-//   const changeName = name.toUpperCase();
-//   req.name = changeName;
-//   next();
-// });
 
-// app.get("/api/users/:name", (req, res) => {
-//   console.log(req.nam);
-//   res.json("Hello " + req.name + "!!!");
-// });
 
-// app.get("/api/:version", (req, res) => {
-//   res.json({
-//     version: req.params.version,
-//   });
-// });
+
+
+app.param("name", (req, res, next, name) => {
+  const changeName = name.toUpperCase();
+  req.name = changeName;
+  next();
+});
+
+app.get("/api/users/:name", (req, res) => {
+  console.log(req.nam);
+  res.json("Hello " + req.name + "!!!");
+});
+
+app.get("/api/:version", (req, res) => {
+  res.json({
+    version: req.params.version,
+  });
+});
 
 app.listen(PORT, () => console.log(`Express running on the ${PORT} number`));
