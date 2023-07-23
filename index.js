@@ -4,6 +4,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 const uuidv1 = require("uuid");
 const db = require("./query");
+const agora = require("./agoraApi");
 //const bodyParser = require(body - parser);
 let meeting_id = 1;
 
@@ -25,14 +26,11 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
 app.get("/", (req, res) => {
   res.json("Wellcomw to the Express World");
 });
 
 app.post("/", db.create_meeting);
-
 
 //(req, res) => {
 //   // const { name, id } = req.body;
@@ -75,7 +73,7 @@ app.post("/", db.create_meeting);
 // app.get("/meetings", db.get_meeting_details);
 // app.get("/meeting/:id", db.get_meeting_details_by_id);
 // app.post("/createmeeting", db.create_meeting);
-
+app.get("/getAgoraResourceId", agora.getAgoraResourceId);
 
 app.get("/create_meeting", (req, res) => {
   const meeting_id = 12345;
@@ -151,9 +149,6 @@ app.get("/api/users", (req, res) => {
 });
 
 // //target specificy a params using params functiion and this is the middleware
-
-
-
 
 app.param("name", (req, res, next, name) => {
   const changeName = name.toUpperCase();
